@@ -1,5 +1,11 @@
+# Django
 Django==1.8.7
-djangorestframework==3.3.1
 dj-database-url==0.3.0
+Unipath==1.1
 psycopg2==2.6.1
+
+# API
+djangorestframework==3.3.1
+
+# Production
 gunicorn==19.4.1

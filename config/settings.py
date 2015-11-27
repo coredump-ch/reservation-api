@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 import os
 
 import dj_database_url
+from unipath import Path
 
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -57,6 +58,8 @@ MIDDLEWARE_CLASSES = (
 )
 
 ROOT_URLCONF = 'config.urls'
+
+PROJECT_ROOT = Path(__file__).ancestor(1)
 
 TEMPLATES = [
     {
@@ -110,3 +113,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATIC_ROOT = PROJECT_ROOT.child('static')
+MEDIA_ROOT = PROJECT_ROOT.child('media')
