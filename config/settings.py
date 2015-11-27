@@ -12,23 +12,39 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 import os
 
+from django.core.exceptions import ImproperlyConfigured
+
 import dj_database_url
 from unipath import Path
+
+
+# Helper functions
+
+def env(name, default=None):
+    return os.environ.get(name, default)
+
+def require_env(name):
+    value = env(name)
+    if not value:
+        raise ImproperlyConfigured('Missing {} env variable'.format(name))
+    return value
+
+true_values = ['1', 'true', 'y', 'yes', 1, True]
 
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = require_env('DJANGO_DEBUG').lower() in true_values
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'om96nq^l7s!((5fy(aj5dp_^y$ghux@vzka+_%!x61u2$x_7pf'
+SECRET_KEY = env('SECRET_KEY', 'DEBUG_SECRET_KEY')
+if SECRET_KEY == 'DEBUG_SECRET_KEY' and DEBUG is False:
+    raise ImproperlyConfigured('Missing SECRET_KEY env variable. You can ' +
+            'generate one with `./manage.py generate_secret_key`.')
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['reservations.coredump.ch']
 
 
 # Application definition
