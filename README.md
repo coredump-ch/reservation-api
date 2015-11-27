@@ -3,14 +3,76 @@
 A small Python 3 / Django 1.8 project to manage reservations for our 3D printer.
 
 
+## API Tokens
+
+You need an API token to be able to read or write from this API. Request one
+from `danilo@coredump.ch`.
+
+The token should be included in the `Authorization` HTTP header. e key should
+be prefixed by the string literal "Token", with whitespace separating the two
+strings. For example:
+
+    Authorization: Token 9944b09199c62bcf9418ad846dd0e4bbdfc6ee4b
+
+
 ## API Endpoints
 
-- `GET /api/v1/reservations/` - List reservations
-- `POST /api/v1/reservations/` - Create new reservation
-- `GET /api/v1/reservations/<id>/` - Show reservation details
-- `PUT /api/v1/reservations/<id>/` - Update reservation
-- `PATCH /api/v1/reservations/<id>/` - Update reservation
-- `DELETE /api/v1/reservations/<id>/` - Delete reservation
+All endpoints are below `/api/v1`.
+
+- `GET /reservations/` - List reservations
+- `POST /reservations/` - Create new reservation
+- `GET /reservations/<id>/` - Show reservation details
+- `PUT /reservations/<id>/` - Update reservation
+- `PATCH /reservations/<id>/` - Update reservation
+- `DELETE /reservations/<id>/` - Delete reservation
+
+Example: Create reservation.
+
+    $ curl -H "Authorization: Token <token>" \
+           -d "owner=Danilo&start=2020-10-12T15:00:00Z&duration=03:00:00" \
+           /api/v1/reservations/
+
+Output:
+
+    {
+        "pk": 3,
+        "url": "http://localhost:8000/api/v1/reservations/3/",
+        "owner": "Danilo",
+        "start": "2020-10-12T15:00:00Z",
+        "duration": "03:00:00"
+    }
+
+Example: Get paginated list of reservations.
+
+    $ curl -H "Authorization: Token <token>" \
+           /api/v1/reservations/
+
+Output:
+
+    {
+        "count": 2,
+        "next": null,
+        "previous": null,
+        "results": [
+            {
+                "pk": 1,
+                "url": "http://localhost:8000/api/v1/reservations/1/",
+                "owner": "Danilo",
+                "start": "2015-10-12T15:00:00Z",
+                "duration": "03:00:00"
+            },
+            {
+                "pk": 2,
+                "url": "http://localhost:8000/api/v1/reservations/2/",
+                "owner": "Danilo",
+                "start": "2020-10-12T15:00:00Z",
+                "duration": "03:00:00"
+            }
+        ]
+    }
+
+If there are multiple pages, you will find the corresponding URLs in the `next`
+or `previous` response fields.
 
 
 ## Dev Setup
