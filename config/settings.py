@@ -75,7 +75,7 @@ MIDDLEWARE_CLASSES = (
 
 ROOT_URLCONF = 'config.urls'
 
-PROJECT_ROOT = Path(__file__).ancestor(1)
+PROJECT_ROOT = Path(__file__).ancestor(2)
 
 TEMPLATES = [
     {
