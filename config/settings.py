@@ -139,3 +139,19 @@ STATIC_URL = '/static/'
 
 STATIC_ROOT = PROJECT_ROOT.child('static')
 MEDIA_ROOT = PROJECT_ROOT.child('media')
+
+
+# Opbeat
+
+if not DEBUG:
+    INSTALLED_APPS += (
+        'opbeat.contrib.django',
+    )
+    OPBEAT = {
+        'ORGANIZATION_ID': '2e1b1154472c4dfa8dca73c2f48cbe59',
+        'APP_ID': '721505e43e',
+        'SECRET_TOKEN': require_env('OPBEAT_SECRET_TOKEN'),
+    }
+    MIDDLEWARE_CLASSES = (
+        'opbeat.contrib.django.middleware.OpbeatAPMMiddleware',
+    ) + MIDDLEWARE_CLASSES

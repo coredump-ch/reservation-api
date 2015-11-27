@@ -9,3 +9,4 @@ djangorestframework==3.3.1
 
 # Production
 gunicorn==19.4.1
+opbeat==3.1.3
