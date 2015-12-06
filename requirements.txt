@@ -6,6 +6,7 @@ psycopg2==2.6.1
 
 # API
 djangorestframework==3.3.1
+django-cors-headers==1.1.0
 
 # Production
 gunicorn==19.4.1
