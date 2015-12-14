@@ -29,7 +29,7 @@ All endpoints are below `/api/v1`.
 Example: Create reservation.
 
     $ curl -H "Authorization: Token <token>" \
-           -d "owner=Danilo&start=2020-10-12T15:00:00Z&duration=03:00:00" \
+           -d "owner=Danilo&start=2020-10-12T15:00:00Z&end=2020-10-12T16:30:00Z" \
            /api/v1/reservations/
 
 Output:
@@ -39,7 +39,7 @@ Output:
         "url": "http://localhost:8000/api/v1/reservations/3/",
         "owner": "Danilo",
         "start": "2020-10-12T15:00:00Z",
-        "duration": "03:00:00"
+        "end": "2020-10-12T16:30:00Z"
     }
 
 Example: Get paginated list of reservations.
@@ -59,14 +59,14 @@ Output:
                 "url": "http://localhost:8000/api/v1/reservations/1/",
                 "owner": "Danilo",
                 "start": "2015-10-12T15:00:00Z",
-                "duration": "03:00:00"
+                "end": "2015-10-12T16:30:00Z"
             },
             {
                 "pk": 2,
                 "url": "http://localhost:8000/api/v1/reservations/2/",
                 "owner": "Danilo",
                 "start": "2020-10-12T15:00:00Z",
-                "duration": "03:00:00"
+                "end": "2020-10-13T15:00:00Z"
             }
         ]
     }

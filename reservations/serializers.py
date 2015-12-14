@@ -6,4 +6,4 @@ from . import models
 class ReservationSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = models.Reservation
-        fields = ('pk', 'url', 'owner', 'start', 'duration')
+        fields = ('pk', 'url', 'owner', 'start', 'end')
