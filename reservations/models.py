@@ -12,3 +12,6 @@ class Reservation(models.Model):
 
     def __str__(self):
         return '%s on %s for %s' % (self.owner, self.start, self.duration)
+
+    class Meta:
+        ordering = ('start',)
