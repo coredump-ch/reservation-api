@@ -6,7 +6,7 @@ from . import views
 
 
 router = routers.DefaultRouter()
-router.register(r'reservations', views.ReservationViewSet)
+router.register(r'reservations', views.ReservationViewSet, base_name='reservation')
 
 urlpatterns = [
     url(r'^', include(router.urls)),
