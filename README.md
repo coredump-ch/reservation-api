@@ -109,6 +109,16 @@ Run dev server:
 
     ./manage.py runserver
 
+## Running the tests
+
+Install dependencies:
+
+    pip install -r requirements-dev.txt
+
+Run tests:
+
+    py.test
+
 ## License
 
 AGPLv3 License.
