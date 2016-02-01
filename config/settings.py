@@ -125,6 +125,13 @@ REST_FRAMEWORK = {
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_URLS_REGEX = r'^/api/.*$'
 
+# Session
+
+# We disable the session cookie httponly flag, so that the session can be
+# terminated from JavaScript by removing this cookie. This increases the CSS
+# risk a bit, but this is not a critical API :)
+SESSION_COOKIE_HTTPONLY = False
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
