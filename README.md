@@ -1,6 +1,6 @@
 # Ultimaker Reservation API
 
-A small Python 3 / Django 1.8 project to manage reservations for our 3D printer.
+A small Python 3 / Django 1.11 LTS project to manage reservations for our 3D printer.
 
 
 ## API Tokens

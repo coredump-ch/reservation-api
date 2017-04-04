@@ -44,7 +44,10 @@ if SECRET_KEY == 'DEBUG_SECRET_KEY' and DEBUG is False:
     raise ImproperlyConfigured('Missing SECRET_KEY env variable. You can ' +
             'generate one with `./manage.py generate_secret_key`.')
 
-ALLOWED_HOSTS = ['reservations.coredump.ch']
+if DEBUG is False:
+    ALLOWED_HOSTS = ['reservations.coredump.ch']
+else:
+    ALLOWED_HOSTS = []
 
 
 # Application definition
