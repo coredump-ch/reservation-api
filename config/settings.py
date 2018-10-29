@@ -141,7 +141,7 @@ SESSION_COOKIE_HTTPONLY = False
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Zurich'
 
 USE_I18N = True
 
