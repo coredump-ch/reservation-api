@@ -2,3 +2,4 @@
 *.swp
 .cache
 .coverage
+.mypy_cache/
