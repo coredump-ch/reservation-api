@@ -19,6 +19,6 @@ from django.contrib import admin
 from reservations import urls as reservation_urls
 
 urlpatterns = [
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^admin/', admin.site.urls),
     url(r'^api/v1/', include(reservation_urls)),
 ]
