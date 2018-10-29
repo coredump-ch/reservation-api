@@ -1,7 +1,12 @@
+from datetime import timedelta
+
+from django.utils import timezone
+from model_mommy import mommy
 import pytest
 from rest_framework.test import APIClient
-from model_mommy import mommy
 from rest_framework.authtoken.models import Token
+
+from reservations.models import Reservation
 
 
 @pytest.mark.django_db
@@ -29,3 +34,20 @@ def test_empty_duration(api_client):
     })
     assert r1.status_code == 400
     assert r2.status_code == 400
+
+
+@pytest.mark.django_db
+def test_pagination(api_client):
+    """
+    Ensure pagination is enabled
+    """
+    mommy.make(
+        Reservation,
+        start=timezone.now(),
+        end=timezone.now() + timedelta(hours=3),
+        _quantity=30,
+    )
+    r1 = api_client.get('/api/v1/reservations/')
+    assert set(r1.data.keys()) == {'results', 'previous', 'count', 'next'}
+    assert r1.data['count'] == 30  # Total available
+    assert len(r1.data['results']) == 20  # Returned per page
