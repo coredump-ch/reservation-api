@@ -10,4 +10,3 @@ django-cors-headers==2.0.2
 
 # Production
 gunicorn==19.7.1
-opbeat==3.5.2
