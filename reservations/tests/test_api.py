@@ -1,7 +1,7 @@
 from datetime import timedelta
 
 from django.utils import timezone
-from model_mommy import mommy
+from model_bakery import baker
 import pytest
 from rest_framework.test import APIClient
 from rest_framework.authtoken.models import Token
@@ -12,7 +12,7 @@ from reservations.models import Reservation
 @pytest.mark.django_db
 @pytest.fixture(scope='function')
 def api_client():
-    token = mommy.make(Token)
+    token = baker.make(Token)
     client = APIClient()
     client.credentials(HTTP_AUTHORIZATION='Token ' + token.key)
     return client
@@ -41,7 +41,7 @@ def test_pagination(api_client):
     """
     Ensure pagination is enabled
     """
-    mommy.make(
+    baker.make(
         Reservation,
         start=timezone.now(),
         end=timezone.now() + timedelta(hours=3),
