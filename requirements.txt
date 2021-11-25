@@ -9,4 +9,4 @@ djangorestframework~=3.12.4
 django-cors-headers~=3.10.0
 
 # Production
-gunicorn>=19.9,<19.10
+gunicorn~=20.1.0
