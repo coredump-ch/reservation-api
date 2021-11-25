@@ -1,0 +1,36 @@
+# Note: This config is not currently set up for development, it's meant mostly
+# as an example for a productive deployment.
+#
+# This setup currently does not serve static files. In order to serve static
+# files, mount the /code/static directory to a directory on the host
+# and configure your web server to serve these files on /static/.
+
+version: "3.9"
+   
+volumes:
+  reservation-api-data:
+
+services:
+  db:
+    image: docker.io/postgres:14-alpine
+    volumes:
+      - reservation-api-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U reservation-api"]
+      interval: 30s
+      timeout: 30s
+      retries: 3
+    environment:
+      - POSTGRES_DB=reservation-api
+      - POSTGRES_USER=reservation-api
+      - POSTGRES_PASSWORD=TODO-CHANGEME
+  web:
+    build: .
+    ports:
+      - "127.0.0.1:8000:8000"
+    environment:
+      SECRET_KEY: TODO-CHANGEME
+      DATABASE_URL: postgres://reservation-api:TODO-CHANGEME@db/reservation-api
+      ALLOWED_HOST: localhost
+    depends_on:
+      - db
