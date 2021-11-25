@@ -83,7 +83,6 @@ Prerequisites:
 
 - Python 3.6+
 - Pip
-- Virtualenvwrapper
 - PostgreSQL
 
 Database:
