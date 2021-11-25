@@ -1,6 +1,6 @@
 # Ultimaker Reservation API
 
-A small Python 3 / Django 1.11 LTS project to manage reservations for our 3D printer.
+A small Python 3 / Django 3.2 LTS project to manage reservations for our 3D printer.
 
 
 ## API Tokens
@@ -79,7 +79,7 @@ or `previous` response fields.
 
 Prerequisites:
 
-- Python 3.3+
+- Python 3.6+
 - Pip
 - Virtualenvwrapper
 - PostgreSQL
@@ -90,16 +90,15 @@ Database:
 
 Dependencies:
 
-    mkvirtualenv reservations
+    python3 -m venv venv
+    source venv/bin/activate
     pip install -r requirements.txt
 
 Env vars:
 
-    POSTACTIVATE=$VIRTUAL_ENV/$VIRTUALENVWRAPPER_ENV_BIN_DIR/postactivate
-    echo "export DJANGO_DEBUG=True" >> $POSTACTIVATE
-    echo "export PORT=8000" >> $POSTACTIVATE
-    echo "export DATABASE_URL='postgres://localhost/reservations'" >> $POSTACTIVATE
-    source $POSTACTIVATE
+    export DJANGO_DEBUG=True
+    export PORT=8000
+    export DATABASE_URL='postgres://localhost/reservations'
 
 Migrate database:
 
@@ -117,7 +116,7 @@ Install dependencies:
 
 Run tests:
 
-    py.test
+    pytest
 
 ## License
 
