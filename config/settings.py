@@ -45,7 +45,7 @@ if SECRET_KEY == 'DEBUG_SECRET_KEY' and DEBUG is False:
             'generate one with `./manage.py generate_secret_key`.')
 
 if DEBUG is False:
-    ALLOWED_HOSTS = ['reservations.coredump.ch']
+    ALLOWED_HOSTS = [env('ALLOWED_HOST', 'reservations.coredump.ch')]
 else:
     ALLOWED_HOSTS = []
 
