@@ -1,12 +1,12 @@
 # Django
-Django~=2.2.24
+Django~=3.0.14
 dj-database-url>=0.5,<0.6
 Unipath==1.1
 psycopg2-binary~=2.8.6
 
 # API
-djangorestframework>=3.9,<3.10
-django-cors-headers>=2.4,<2.5
+djangorestframework~=3.10.3
+django-cors-headers~=3.10.0
 
 # Production
 gunicorn>=19.9,<19.10
