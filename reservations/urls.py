@@ -1,4 +1,4 @@
-from django.conf.urls import url, include
+from django.urls import re_path, include
 
 from rest_framework import routers
 
@@ -9,6 +9,6 @@ router = routers.DefaultRouter()
 router.register(r'reservations', views.ReservationViewSet, basename='reservation')
 
 urlpatterns = [
-    url(r'^', include(router.urls)),
-    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+    re_path(r'^', include(router.urls)),
+    re_path(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]
