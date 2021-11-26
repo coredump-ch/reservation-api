@@ -30,6 +30,9 @@ ENV DJANGO_DEBUG=False
 # Volumes
 VOLUME ["/code/static/", "/code/media/"]
 
+# Port
+EXPOSE 8000
+
 # Entry point
 ENTRYPOINT ["/usr/bin/dumb-init", "--"]
 CMD ["/bin/bash", "entrypoint.sh"]
