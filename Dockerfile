@@ -33,6 +33,10 @@ VOLUME ["/code/static/", "/code/media/"]
 # Port
 EXPOSE 8000
 
+# Healthcheck
+HEALTHCHECK --interval=30s --timeout=5s \
+    CMD python /code/docker/healthcheck.py
+
 # Entry point
 ENTRYPOINT ["/usr/bin/dumb-init", "--"]
-CMD ["/bin/bash", "entrypoint.sh"]
+CMD ["/bin/bash", "docker/entrypoint.sh"]
