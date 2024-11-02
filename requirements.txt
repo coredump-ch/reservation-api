@@ -5,7 +5,7 @@ Unipath==1.1
 psycopg2-binary~=2.8.6
 
 # API
-djangorestframework~=3.12.4
+djangorestframework~=3.14.0
 django-cors-headers~=3.10.0
 
 # Production
