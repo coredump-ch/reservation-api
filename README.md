@@ -2,7 +2,7 @@
 
 [![Build Status](https://github.com/coredump-ch/reservation-api/workflows/CI/badge.svg)](https://github.com/coredump-ch/reservation-api/actions?query=branch%3Amain)
 
-A small Python 3 / Django 3.2 LTS project to manage reservations for our 3D printer.
+A small Python 3 / Django 4.2 LTS project to manage reservations for our 3D printer.
 
 ## API Tokens
 
