@@ -5,13 +5,13 @@
 # - SECRET_KEY=...
 # - DATABASE_URL='postgres://<postgres-host>/<database-name>'
 # - ALLOWED_HOST='reservations.coredump.ch'
-#
-# See docker-compose.yml as an example on how to run this image.
 
 FROM docker.io/python:3.9-slim-bullseye
 
+ARG REQUIREMENTS_FILE=requirements.txt
+
 # Add requirements file
-ADD requirements.txt /code/requirements.txt
+ADD requirements*.txt /code/
 WORKDIR /code
 
 # Install dependencies
@@ -19,7 +19,7 @@ RUN apt-get update -qq \
  && apt-get install -yq --no-install-recommends \
     dumb-init \
  && rm -rf /var/lib/apt/lists/*
-RUN pip install -r requirements.txt
+RUN pip install -r $REQUIREMENTS_FILE
 
 # Add code
 ADD . /code

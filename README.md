@@ -4,18 +4,16 @@
 
 A small Python 3 / Django 3.2 LTS project to manage reservations for our 3D printer.
 
-
 ## API Tokens
 
 You need an API token to be able to read or write from this API. Request one
 from `danilo@coredump.ch`.
 
-The token should be included in the `Authorization` HTTP header. e key should
+The token should be included in the `Authorization` HTTP header. The key should
 be prefixed by the string literal "Token", with whitespace separating the two
 strings. For example:
 
     Authorization: Token 9944b09199c62bcf9418ad846dd0e4bbdfc6ee4b
-
 
 ## API Endpoints
 
@@ -76,8 +74,15 @@ Output:
 If there are multiple pages, you will find the corresponding URLs in the `next`
 or `previous` response fields.
 
+## Dev Setup: Docker Compose
 
-## Dev Setup
+Run `docker-compose up` and enjoy the dev server at `http://localhost:8000/`.
+
+To run tests:
+
+    docker compose exec web pytest
+
+## Dev Setup: Manual
 
 Prerequisites:
 
@@ -93,7 +98,7 @@ Dependencies:
 
     python3 -m venv venv
     source venv/bin/activate
-    pip install -r requirements.txt
+    pip install -r requirements-dev.txt
 
 Env vars:
 
@@ -108,12 +113,6 @@ Migrate database:
 Run dev server:
 
     ./manage.py runserver
-
-## Running the tests
-
-Install dependencies:
-
-    pip install -r requirements-dev.txt
 
 Run tests:
 
