@@ -6,7 +6,7 @@
 # - DATABASE_URL='postgres://<postgres-host>/<database-name>'
 # - ALLOWED_HOST='reservations.coredump.ch'
 
-FROM docker.io/python:3.9-slim-bullseye
+FROM docker.io/python:3.13-slim-bookworm
 
 ARG REQUIREMENTS_FILE=requirements.txt
 
