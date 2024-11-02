@@ -10,11 +10,11 @@ from reservations.models import Reservation
 
 
 @pytest.mark.django_db
-@pytest.fixture(scope='function')
+@pytest.fixture(scope="function")
 def api_client():
     token = baker.make(Token)
     client = APIClient()
-    client.credentials(HTTP_AUTHORIZATION='Token ' + token.key)
+    client.credentials(HTTP_AUTHORIZATION="Token " + token.key)
     return client
 
 
@@ -23,15 +23,21 @@ def test_empty_duration(api_client):
     """
     Regression test for issue 3.
     """
-    r1 = api_client.post('/api/v1/reservations/', {
-        'owner': 'Test',
-        'start': '2017-04-02T22:05:00Z',
-        'end': '',
-    })
-    r2 = api_client.post('/api/v1/reservations/', {
-        'owner': 'Test',
-        'start': '2017-04-02T22:05:00Z',
-    })
+    r1 = api_client.post(
+        "/api/v1/reservations/",
+        {
+            "owner": "Test",
+            "start": "2017-04-02T22:05:00Z",
+            "end": "",
+        },
+    )
+    r2 = api_client.post(
+        "/api/v1/reservations/",
+        {
+            "owner": "Test",
+            "start": "2017-04-02T22:05:00Z",
+        },
+    )
     assert r1.status_code == 400
     assert r2.status_code == 400
 
@@ -47,7 +53,7 @@ def test_pagination(api_client):
         end=timezone.now() + timedelta(hours=3),
         _quantity=30,
     )
-    r1 = api_client.get('/api/v1/reservations/')
-    assert set(r1.data.keys()) == {'results', 'previous', 'count', 'next'}
-    assert r1.data['count'] == 30  # Total available
-    assert len(r1.data['results']) == 20  # Returned per page
+    r1 = api_client.get("/api/v1/reservations/")
+    assert set(r1.data.keys()) == {"results", "previous", "count", "next"}
+    assert r1.data["count"] == 30  # Total available
+    assert len(r1.data["results"]) == 20  # Returned per page
