@@ -1,0 +1,6 @@
+[tool.ruff]
+exclude = [
+    "setup.py",
+    "migrations",
+]
+line-length = 99

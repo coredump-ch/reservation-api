@@ -1,7 +1,6 @@
 -r requirements.txt
 pytest~=6.2
 pytest-django~=4.4
-flake8<4 # https://github.com/tholo/pytest-flake8/issues/81
-pytest-flake8~=1.0.7
 pytest-cov~=3.0
+pytest-ruff~=0.4.1
 model-bakery~=1.3
