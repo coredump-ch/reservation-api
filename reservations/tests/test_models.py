@@ -5,46 +5,111 @@ from model_bakery import baker
 from django.utils import timezone
 from django.core.exceptions import ValidationError
 
-from reservations import models
-
 
 # Useful times
 now = timezone.now()
 delta = timedelta(hours=1)
+
+# Recipe Alias
+UltimakerReservation = "reservations.UltimakerReservation"
+PrusaReservation = "reservations.PrusaReservation"
 
 
 @pytest.mark.parametrize(
     ["instance", "conflict"],
     [
         # Regular overlaps
-        (baker.prepare(models.Reservation, start=now, end=now + delta * 2), True),
         (
-            baker.prepare(models.Reservation, start=now - delta / 2, end=now + delta / 2),
+            baker.prepare_recipe(
+                UltimakerReservation,
+                start=now,
+                end=now + delta * 2,
+            ),
             True,
         ),
-        (baker.prepare(models.Reservation, start=now - delta * 2, end=now), True),
+        (
+            baker.prepare_recipe(
+                UltimakerReservation,
+                start=now - delta / 2,
+                end=now + delta / 2,
+            ),
+            True,
+        ),
+        (
+            baker.prepare_recipe(
+                UltimakerReservation,
+                start=now - delta * 2,
+                end=now,
+            ),
+            True,
+        ),
         # Start or end are equal
-        (baker.prepare(models.Reservation, start=now - delta, end=now), True),
-        (baker.prepare(models.Reservation, start=now, end=now + delta), True),
-        (baker.prepare(models.Reservation, start=now - delta, end=now + delta), True),
+        (
+            baker.prepare_recipe(
+                UltimakerReservation,
+                start=now - delta,
+                end=now,
+            ),
+            True,
+        ),
+        (
+            baker.prepare_recipe(
+                UltimakerReservation,
+                start=now,
+                end=now + delta,
+            ),
+            True,
+        ),
+        (
+            baker.prepare_recipe(
+                UltimakerReservation,
+                start=now - delta,
+                end=now + delta,
+            ),
+            True,
+        ),
         # Non conflicts
         (
-            baker.prepare(models.Reservation, start=now - delta * 3, end=now - delta * 2),
+            # Ends earlier
+            baker.prepare_recipe(
+                UltimakerReservation,
+                start=now - delta * 3,
+                end=now - delta * 2,
+            ),
             False,
         ),
         (
-            baker.prepare(models.Reservation, start=now - delta * 2, end=now - delta),
+            # Ends when current reservation starts
+            baker.prepare_recipe(
+                UltimakerReservation,
+                start=now - delta * 2,
+                end=now - delta,
+            ),
             False,
         ),
         (
-            baker.prepare(models.Reservation, start=now + delta, end=now + delta * 2),
+            # Starts when current reservation ends
+            baker.prepare_recipe(
+                UltimakerReservation,
+                start=now + delta,
+                end=now + delta * 2,
+            ),
+            False,
+        ),
+        (
+            # Different printer
+            baker.prepare_recipe(
+                PrusaReservation,
+                start=now,
+                end=now + delta * 2,
+            ),
             False,
         ),
     ],
 )
 @pytest.mark.django_db
 def test_reservation_conflict(instance, conflict):
-    res = baker.make(models.Reservation, start=now - delta, end=now + delta)
+    res = baker.make_recipe(UltimakerReservation, start=now - delta, end=now + delta)
     res.full_clean()
 
     if conflict is True:
