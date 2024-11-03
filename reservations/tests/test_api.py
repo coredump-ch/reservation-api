@@ -19,6 +19,23 @@ def api_client():
 
 
 @pytest.mark.django_db
+def test_create_success(api_client):
+    """
+    Successfully create reservation.
+    """
+    r = api_client.post(
+        "/api/v1/reservations/",
+        {
+            "owner": "Test",
+            "printer": "ultimaker2+",
+            "start": "2017-04-02T22:05:00Z",
+            "end": "2017-04-02T23:00:00Z",
+        },
+    )
+    assert r.status_code == 201, r.data
+
+
+@pytest.mark.django_db
 def test_empty_duration(api_client):
     """
     Regression test for issue 3.

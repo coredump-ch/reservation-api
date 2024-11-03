@@ -7,21 +7,39 @@ class Reservation(models.Model):
     A printer reservation.
     """
 
+    PRINTER_PRUSA = "prusaxl"
+    PRINTER_ULTIMAKER = "ultimaker2+"
+    PRINTER_CHOICES = {PRINTER_PRUSA: "Prusa XL", PRINTER_ULTIMAKER: "Ultimaker 2+"}
+
     owner = models.CharField(
         max_length=255, help_text="The name of the person doing the reservation"
+    )
+    printer = models.CharField(
+        max_length=255,
+        help_text="The printer for which a reservation should be added",
+        choices=[
+            (PRINTER_PRUSA, PRINTER_CHOICES[PRINTER_PRUSA]),
+            (PRINTER_ULTIMAKER, PRINTER_CHOICES[PRINTER_ULTIMAKER]),
+        ],
     )
     start = models.DateTimeField(help_text="When the reservation starts")
     end = models.DateTimeField(help_text="When the reservation ends")
 
     def clean(self):
-        conflicts = Reservation.objects.exclude(pk=self.pk).filter(
-            start__lt=self.end, end__gt=self.start
-        )
-        if conflicts.exists():
-            raise ValidationError("Conflicting reservation by %s" % conflicts[0].owner)
+        super().clean()
+
+        # Detect conflicts
+        if self.start is not None and self.end is not None:
+            conflicts = Reservation.objects.exclude(pk=self.pk).filter(
+                printer=self.printer, start__lt=self.end, end__gt=self.start
+            )
+            if conflicts.exists():
+                raise ValidationError("Conflicting reservation by %s" % conflicts[0].owner)
 
     def __str__(self):
-        return "%s from %s to %s" % (self.owner, self.start, self.end)
+        return (
+            f"{self.owner} ({self.PRINTER_CHOICES[self.printer]}) from {self.start} to {self.end}"
+        )
 
     class Meta:
         ordering = ("start",)

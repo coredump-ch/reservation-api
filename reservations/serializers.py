@@ -11,4 +11,4 @@ class ReservationSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = models.Reservation
-        fields = ("pk", "url", "owner", "start", "end")
+        fields = ("pk", "url", "owner", "printer", "start", "end")
