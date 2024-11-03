@@ -51,6 +51,7 @@ if SECRET_KEY == "DEBUG_SECRET_KEY" and DEBUG is False:
 
 if DEBUG is False:
     ALLOWED_HOSTS = [env("ALLOWED_HOST", "reservations.coredump.ch")]
+    CSRF_TRUSTED_ORIGINS = [f"https://{host}" for host in ALLOWED_HOSTS]
 else:
     ALLOWED_HOSTS = []
 
