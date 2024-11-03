@@ -19,9 +19,7 @@ delta = timedelta(hours=1)
         # Regular overlaps
         (baker.prepare(models.Reservation, start=now, end=now + delta * 2), True),
         (
-            baker.prepare(
-                models.Reservation, start=now - delta / 2, end=now + delta / 2
-            ),
+            baker.prepare(models.Reservation, start=now - delta / 2, end=now + delta / 2),
             True,
         ),
         (baker.prepare(models.Reservation, start=now - delta * 2, end=now), True),
@@ -31,9 +29,7 @@ delta = timedelta(hours=1)
         (baker.prepare(models.Reservation, start=now - delta, end=now + delta), True),
         # Non conflicts
         (
-            baker.prepare(
-                models.Reservation, start=now - delta * 3, end=now - delta * 2
-            ),
+            baker.prepare(models.Reservation, start=now - delta * 3, end=now - delta * 2),
             False,
         ),
         (

@@ -5,7 +5,7 @@ from reservations import urls as reservation_urls
 from config import views
 
 urlpatterns = [
-    re_path(r'^admin/', admin.site.urls),
-    re_path(r'^api/v1/', include(reservation_urls)),
-    re_path(r'^healthcheck/', views.healthcheck),
+    re_path(r"^admin/", admin.site.urls),
+    re_path(r"^api/v1/", include(reservation_urls)),
+    re_path(r"^healthcheck/", views.healthcheck),
 ]
