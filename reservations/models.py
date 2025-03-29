@@ -9,7 +9,14 @@ class Reservation(models.Model):
 
     PRINTER_PRUSA = "prusaxl"
     PRINTER_ULTIMAKER = "ultimaker2+"
-    PRINTER_CHOICES = {PRINTER_PRUSA: "Prusa XL", PRINTER_ULTIMAKER: "Ultimaker 2+"}
+    PRINTER_ELEGOO_MARS = "elegoo-mars"
+    PRINTER_ELEGOO_SATURN4ULTRA = "elegoo-saturn-4ultra"
+    PRINTER_CHOICES = {
+        PRINTER_PRUSA: "Prusa XL",
+        PRINTER_ULTIMAKER: "Ultimaker 2+",
+        PRINTER_ELEGOO_MARS: "Elegoo Mars",
+        PRINTER_ELEGOO_SATURN4ULTRA: "Elegoo Saturn 4 Ultra",
+    }
 
     owner = models.CharField(
         max_length=255, help_text="The name of the person doing the reservation"
@@ -20,6 +27,8 @@ class Reservation(models.Model):
         choices=[
             (PRINTER_PRUSA, PRINTER_CHOICES[PRINTER_PRUSA]),
             (PRINTER_ULTIMAKER, PRINTER_CHOICES[PRINTER_ULTIMAKER]),
+            (PRINTER_ELEGOO_MARS, PRINTER_CHOICES[PRINTER_ELEGOO_MARS]),
+            (PRINTER_ELEGOO_SATURN4ULTRA, PRINTER_CHOICES[PRINTER_ELEGOO_SATURN4ULTRA]),
         ],
     )
     start = models.DateTimeField(help_text="When the reservation starts")

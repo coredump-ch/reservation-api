@@ -1,8 +1,8 @@
-# Ultimaker Reservation API
+# 3D Printer Reservation API
 
 [![Build Status](https://github.com/coredump-ch/reservation-api/workflows/CI/badge.svg)](https://github.com/coredump-ch/reservation-api/actions?query=branch%3Amain)
 
-A small Python 3 / Django 4.2 LTS project to manage reservations for our 3D printer.
+A small Python / Django project to manage reservations for our 3D printer.
 
 ## API Tokens
 
